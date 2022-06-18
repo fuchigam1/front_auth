@@ -1,15 +1,38 @@
 <?php
+/**
+ * FrontAuth : baserCMS Frontend Authentication
+ * Copyright (c) ryuring <http://ryuring.com>
+ *
+ * @copyright     Copyright (c) ryuring
+ * @link          http://ryuring.com
+ * @since         1.0.0
+ * @license       https://basercms.net/license/index.html MIT License
+ */
 
 /**
- * [ControllerEventListener] FrontAuth
- *
+ * FrontAuthControllerEventListener
  */
-class FrontAuthControllerEventListener extends BcControllerEventListener {
+class FrontAuthControllerEventListener extends BcControllerEventListener
+{
 
-	public $events = array('startup');
+	/**
+	 * Events
+	 * @var string[]
+	 */
+	public $events = ['startup'];
 
-	public function startup(CakeEvent $event) {
+	/**
+	 * startup
+	 * @param CakeEvent $event
+	 */
+	public function startup(CakeEvent $event)
+	{
 		$Controller = $event->subject();
+		// 除外URLの場合はスルー
+		$excludeUrlPatterns = Configure::read('FrontAuth.excludeUrlPatterns');
+		if(preg_match('/^(' . implode('|', $excludeUrlPatterns) . ')/', $Controller->request->url)) {
+			return;
+		}
 		// 管理画面の場合はスルー
 		if (BcUtil::isAdminSystem()) {
 			return;
