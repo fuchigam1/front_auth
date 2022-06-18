@@ -29,6 +29,9 @@ $config = [
 			'toolbar' => true,
 			// セッションキー（デフォルトは管理システムと同じキー: Admin → 管理画面にログインすればフロントにもログインできる）
 			'sessionKey' => 'Admin',
+		],
+		'admin' => [
+			'loginRedirect' => '/'
 		]
 	],
 	'FrontAuth' => [
