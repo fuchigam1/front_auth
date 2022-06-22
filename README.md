@@ -23,3 +23,5 @@ FrontAuth プラグインは、公開側認証を実装できるプラグイン�
 - [http://wiki.basercms.net/](http://wiki.basercms.net/)
 - [http://cakephp.jp](http://cakephp.jp)
 - [Semantic Versioning 2.0.0](http://semver.org/lang/ja/)
+
+
