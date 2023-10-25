@@ -51,7 +51,7 @@ class FrontAuthControllerEventListener extends BcControllerEventListener
 		}
 		// スルーに設定されているアクションの場合はスルーする
 		$action = strtolower($Controller->request->params['action']);
-		if (in_array($action, array_map('strtolower', $Controller->allowedFrontAuthActions))) {
+		if (isset($Controller->allowedFrontAuthActions) && in_array($action, array_map('strtolower', $Controller->allowedFrontAuthActions))) {
 			return;
 		}
 		// 認証されていない場合はログイン画面にリダイレクト
