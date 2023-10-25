@@ -49,6 +49,11 @@ class FrontAuthControllerEventListener extends BcControllerEventListener
 		if (('/' . $Controller->request->url) == $Controller->BcAuth->loginAction) {
 			return;
 		}
+		// 認証にてスルーに設定されているアクションの場合はスルーする
+		$action = strtolower($Controller->request->params['action']);
+		if (in_array($action, array_map('strtolower', $Controller->BcAuth->allowedActions))) {
+			return;
+		}
 		// 認証されていない場合はログイン画面にリダイレクト
 		if (!$Controller->BcAuth->user()) {
 			$Controller->redirect($Controller->BcAuth->loginAction);
