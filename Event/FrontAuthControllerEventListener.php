@@ -56,6 +56,10 @@ class FrontAuthControllerEventListener extends BcControllerEventListener
 		}
 		// 認証されていない場合はログイン画面にリダイレクト
 		if (!$Controller->BcAuth->user()) {
+			// ログイン後のリダイレクトURLをセッションに保存
+			if (!$Controller->Session->check('Auth.redirect') && $Controller->request->url) {
+				$Controller->Session->write('Auth.redirect', topLevelUrl(false) . '/' . $Controller->request->url);
+			}
 			$Controller->redirect($Controller->BcAuth->loginAction);
 		}
 	}
